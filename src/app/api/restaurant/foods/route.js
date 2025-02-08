@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import { FoodModel } from "@/app/lib/foodsModel";
 
-const connectionStr = process.env.MONGO_URI;
+ const connectionStr = process.env.MONGO_URI;
 
 export async function POST(request) {
     try {
@@ -24,3 +24,6 @@ export async function POST(request) {
         return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 }
+
+
+
