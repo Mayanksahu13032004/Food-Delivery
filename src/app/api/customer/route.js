@@ -36,8 +36,8 @@ const connectionStr = process.env.MONGO_URI;
 export async function GET(request) {
     const queryParams = request.nextUrl.searchParams;
     await mongoose.connect(connectionStr, { useUnifiedTopology: true });
-
-    console.log("Query Parameters:", queryParams.toString());
+    
+    console.log("Query Parameters:", queryParams);
 
     let filter = {};
 

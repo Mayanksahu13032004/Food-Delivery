@@ -4,12 +4,15 @@ import Image from "next/image";
 import CustomerHeader from "./_components/CustomerHeader";
 import ResturantFooter from "./_components/restaurantFooter";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [location, setLocation] = useState([]); // Store location list
   const [selectedLocation, setSelectedLocation] = useState(""); // Selected location
   const [showLocation, setShowLocation] = useState(false); // Show/hide dropdown
   const [restaurants, setRestaurants] = useState([]); // Store restaurant data
+
+  const router=useRouter();
 
   useEffect(() => {
     loadLocation();
@@ -29,10 +32,10 @@ export default function Home() {
     }
   };
 
-const loadRestaurants = async (params = {}) => {
+const loadRestaurants = async (params={}) => {
   let url = "http://localhost:3000/api/customer";
 
-  if (params.location) {
+  if(params.location) {
     // url += `?location=${encodeURIComponent(params.location)}`;
     url=url+"?location="+params.location;
   }else if(params.restaurant){
@@ -111,7 +114,8 @@ const loadRestaurants = async (params = {}) => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {
           restaurants.map((item, index) => (
-            <div key={index} className="border border-gray-300 rounded-lg p-4 shadow-md">
+            // <div onClick={()=>router.push('explore/'+item.name+"?id="+item._id)} key={index} className="border border-gray-300 rounded-lg p-4 shadow-md">
+             <div onClick={()=>router.push(`explore/${item.name}?id=${item._id}`)} key={index} className="border border-gray-300 rounded-lg p-4 shadow-md">
               <h3 className="text-lg font-bold">{item.name}</h3>
               <p className="text-sm text-gray-600">{item.contact}</p>
               <p className="text-sm text-gray-600">City: {item.city} </p>
