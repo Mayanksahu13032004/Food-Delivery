@@ -45,23 +45,6 @@ const Page = () => {
                 Food Charges  ₹{item.price}
                 </div>
 
-                <div className="mt-2 text-lg font-bold text-green-600">
-                Food Charges  ₹{item.price}
-                </div>
-
-                <div className="mt-2 text-lg font-bold text-green-600">
-                Food Charges  ₹{item.price}
-                </div>
-
-                <div className="mt-2 text-lg font-bold text-green-600">
-                Food Charges  ₹{item.price}
-                </div>
-
-                <div className="mt-2 text-lg font-bold text-green-600">
-                Food Charges  ₹{item.price}
-                </div>
-
-
 
 
 

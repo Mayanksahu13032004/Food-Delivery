@@ -12,7 +12,7 @@ const cartStorage=JSON.parse(localStorage.getItem('cart'));
     console.log("Props of the carddata",props.cartdata);
 
 useEffect(()=>{
-    console.log("props",props);
+    console.log("props of the customer header",props);
     if(props.cartdata){
     if(cartNumber){
         if(cardItem[0].resto_id!=props.cartdata.resto_id){
