@@ -1,6 +1,7 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const UserSignup = () => {
+const UserSignup = (props) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -8,7 +9,7 @@ const UserSignup = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
-
+const router =useRouter();
   const handleSignUp = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
@@ -27,6 +28,18 @@ const UserSignup = () => {
       response = await response.json();
       if (response.success) {
         alert("User sign-up successful!");
+        const {result}=response;
+        console.log("response of the signup ",response);
+        console.log("result of the signup ",result);
+        
+        delete result.password;
+        localStorage.setItem('user',JSON.stringify(result));
+        if(props.redirect?.order){
+          router.push('/order');    
+      }else{
+      router.push('/');
+      }
+
       } else {
         alert("Failed user sign-up");
       }

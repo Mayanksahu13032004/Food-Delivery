@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { User } from "@/app/lib/usermodel";
 import { NextResponse } from "next/server";
+import { Result } from "postcss";
+import next from "next";
 
 const connectionStr = process.env.MONGO_URI;
 
@@ -36,9 +38,10 @@ export async function POST(request) {
         const newUser = new User({ ...payload });
         await newUser.save();
 
-        return NextResponse.json({ success: true, user: newUser }, { status: 201 });
+        return NextResponse.json({ success: true, result: newUser }, { status: 201 });
 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+

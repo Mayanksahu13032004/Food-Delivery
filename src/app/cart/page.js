@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import CustomerHeader from "../_components/CustomerHeader.js";
 import { DeliveryCharges, TAX } from "../lib/constant.js";
+import { useRouter } from "next/navigation.js";
 
 const Page = () => {
+  const router =useRouter();
   const [cartStorage, setCartStorage] = useState(JSON.parse(localStorage.getItem("cart")));
   const [total]=useState(()=>cartStorage.length==1?cartStorage[0].price:cartStorage.reduce((a,b)=>{
     return a.price+b.price
@@ -22,6 +24,15 @@ const Page = () => {
     setCartStorage(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
+  
+  const ordernow=()=>{
+    if(JSON.parse(localStorage.getItem('user'))){
+      router.push('/order');
+    }else{
+      router.push('/user-auth?order=true');
+    }
+
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -88,7 +99,7 @@ const Page = () => {
   </div>
 
   <div className="flex justify-center mt-6">
-  <button className="bg-red-500 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
+  <button onClick={ordernow} className="bg-red-500 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300">
     Order Now
   </button>
 </div>
